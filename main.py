@@ -28,24 +28,27 @@ def print_game_changes():
 
 
 def check_win_condition():
-    print("\n")
     for row in all_rows:
         if row.count(row[0]) == len(row) and row[0]!= "_":
+            print_game_changes()
             print(f"We have a Winner. \nWinner is {row[0]}")
             return True
 
     for a in range(0, 2):
         if all_rows[0][a] == all_rows[1][a] == all_rows[2][a] and all_rows[2][a] != "_":
+            print_game_changes()
             print(f"We have a Winner. \nWinner is {all_rows[0][a]}")
             return True
 
 
     if all_rows[0][0] == all_rows[1][1] == all_rows[2][2] and all_rows[2][2] != "_":
+        print_game_changes()
         print(f"We have a Winner. \nWinner is {all_rows[0][0]}")
         return True
 
 
     elif all_rows[0][2] == all_rows[1][1] == all_rows[2][0] and all_rows[2][0] != "_":
+        print_game_changes()
         print(f"We have a Winner. \nWinner is {all_rows[0][2]}")
         return True
 
@@ -67,10 +70,13 @@ while game_not_finished:
     input_row = int(input("\nWhich row would you like to put symbol in?"))
     input_column = int(input("Which column would you like to put symbol in?"))
 
+
     if all_rows[input_row -1][input_column -1] == "_":
         all_rows[input_row - 1][input_column - 1] = user_choice
-        computer_choice()
-        print_game_changes()
-    if check_win_condition():
-        print("Game finished")
-        game_not_finished = False
+        if check_win_condition():
+            print("Game finished!!!")
+            game_not_finished = False
+        else:
+            computer_choice()
+            print_game_changes()
+
